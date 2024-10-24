@@ -1,0 +1,32 @@
+services:
+  # ======================================== API ========================================
+  prometey-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: api
+
+    environment:
+      ASPNETCORE_ENVIRONMENT: ''
+      JWT__Key: ''
+      JWT__Issuer: 'prometey'
+      JWT__Audience: 'prometey'
+      Authentication__Salt: ''
+      Logging__LogLevel__Default: 'Information'
+      Logging__LogLevel__Microsoft_AspNetCore: 'Warning'
+      ConnectionStrings__DefaultConnection: 'Server=localhost;Database=prometey;User Id=prometey;Password=root;'
+      MailSettings__Email: ''
+      MailSettings__Password: ''
+      MailSettings__SmtpServer: ''
+      MailSettings__SmtpPort: ''
+      ADMIN__Login: 'administrator@theprometey.xyz'
+      ADMIN__Password: 'root'
+
+    ports:
+      - "5205:5205"
+      
+    volumes:
+      - logs:/app/logs
+
+volumes:
+  logs:
